@@ -1,0 +1,36 @@
+{
+  "name": "@studio/ndjson",
+  "version": "0.0.0",
+  "description": "Transforms to parse and stringify ndjson",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "mocha",
+    "watch": "mocha --watch",
+    "posttest": "npm run lint",
+    "preversion": "npm test",
+    "version": "changes",
+    "postversion": "git push --follow-tags && npm publish"
+  },
+  "keywords": [
+    "json",
+    "nsjson",
+    "transform"
+  ],
+  "author": "Maximilian Antoni <max@javascript.studio>",
+  "homepage": "https://github.com/javascript-studio/studio-ndjson",
+  "eslintConfig": {
+    "extends": "@studio"
+  },
+  "devDependencies": {
+    "@studio/changes": "^1.1.0",
+    "@studio/eslint-config": "^1.0.0",
+    "eslint": "^3.14.1",
+    "mocha": "^3.2.0",
+    "sinon": "^2.3.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/javascript-studio/studio-nsjson.git"
+  },
+  "license": "MIT"
+}

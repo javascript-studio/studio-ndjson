@@ -9,44 +9,66 @@ const Transform = require('stream').Transform;
 
 module.exports = class extends Transform {
 
-  constructor() {
+  constructor(options) {
     super({
       readableObjectMode: true
     });
     this.str = '';
+    if (options) {
+      this.loose = options.loose || options.loose_out;
+      this.loose_out = options.loose_out;
+    } else {
+      this.loose = false;
+    }
   }
 
   _transform(data, encoding, callback) {
     let str = this.str + data;
-    let p = str.indexOf('\n');
-    while (p !== -1) {
-      let parsed;
-      try {
-        parsed = JSON.parse(str.substring(0, p));
-      } catch (e) {
-        callback(e);
+    for (;;) {
+      const p = str.indexOf('\n');
+      if (p === -1) {
+        break;
+      }
+      if (this._line(str.substring(0, p), callback)) {
         return;
       }
-      this.push(parsed);
       str = str.substring(p + 1);
-      p = str.indexOf('\n');
     }
     this.str = str;
     callback();
   }
 
   _flush(callback) {
-    if (this.str) {
-      let parsed;
-      try {
-        parsed = JSON.parse(this.str);
-      } catch (e) {
-        callback(e);
-        return;
-      }
-      this.push(parsed);
+    if (this.str && this._line(this.str, callback)) {
+      return;
     }
     callback();
+  }
+
+  _line(line, callback) {
+    if (this.loose) {
+      const s = line.indexOf('{');
+      if (s === -1) {
+        if (this.loose_out) {
+          this.loose_out.write(line);
+          this.loose_out.write('\n');
+        }
+        return false;
+      }
+      if (this.loose_out) {
+        this.loose_out.write(line.substring(0, s));
+      }
+      line = line.substring(s);
+    }
+    let parsed;
+    try {
+      parsed = JSON.parse(line);
+    } catch (e) {
+      callback(e);
+      return true;
+    }
+    this.push(parsed);
+    return false;
   }
 
 };

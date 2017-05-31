@@ -36,6 +36,12 @@ both:
 const { StringifyTransform, ParseTransform } = require('@studio/ndjson');
 ```
 
+## ParseTransform options
+
+- `loose`: Whether to ignore data before the first `{` in each line.
+- `loose_out`: A stream to receive data that was found before the first `{` in
+  each line. Implies `loose`.
+
 ## Error handling
 
 If `JSON.parse` or `JSON.stringify` throw an error, the transform emits an

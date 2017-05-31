@@ -96,4 +96,107 @@ describe('ParseTransform', () => {
     });
   });
 
+  describe('loose', () => {
+
+    it('ignores line without `{`', (done) => {
+      const transform = new ParseTransform({ loose: true });
+      const spy = sinon.spy();
+      transform.on('error', spy);
+      transform.on('data', () => {
+        assert.fail('Unexpected data');
+      });
+      transform.on('end', () => {
+        sinon.assert.notCalled(spy);
+        done();
+      });
+
+      transform.write('no json\n');
+      transform.end();
+    });
+
+    it('ignores data before first `{`', (done) => {
+      const transform = new ParseTransform({ loose: true });
+      const spy = sinon.spy();
+      transform.on('error', spy);
+      const entries = [];
+      transform.on('data', (entry) => {
+        entries.push(entry);
+      });
+      transform.on('end', () => {
+        sinon.assert.notCalled(spy);
+        assert.deepEqual(entries, [{ some: 'json' }]);
+        done();
+      });
+
+      transform.write('no json {"some":"json"}\n');
+      transform.end();
+    });
+
+  });
+
+  describe('loose_out', () => {
+
+    it('passes line without `{` through', (done) => {
+      const out = new PassThrough();
+      const transform = new ParseTransform({ loose_out: out });
+      transform.on('data', () => {
+        assert.fail('Unexpected data');
+      });
+      let str = '';
+      out.on('data', (chunk) => {
+        str += chunk;
+      });
+      transform.on('end', () => {
+        assert.equal(str, 'no json\n');
+        done();
+      });
+
+      transform.write('no json\n');
+      transform.end();
+    });
+
+    it('passes data before `{` through', (done) => {
+      const out = new PassThrough();
+      const transform = new ParseTransform({ loose_out: out });
+      const entries = [];
+      transform.on('data', (entry) => {
+        entries.push(entry);
+      });
+      let str = '';
+      out.on('data', (chunk) => {
+        str += chunk;
+      });
+      transform.on('end', () => {
+        assert.equal(str, 'no json ');
+        assert.deepEqual(entries, [{ some: 'json' }]);
+        done();
+      });
+
+      transform.write('no json {"some":"json"}\n');
+      transform.end();
+    });
+
+    it('passes data before `{` through in remainder', (done) => {
+      const out = new PassThrough();
+      const transform = new ParseTransform({ loose_out: out });
+      const entries = [];
+      transform.on('data', (entry) => {
+        entries.push(entry);
+      });
+      let str = '';
+      out.on('data', (chunk) => {
+        str += chunk;
+      });
+      transform.on('end', () => {
+        assert.equal(str, 'no json ');
+        assert.deepEqual(entries, [{ some: 'json' }]);
+        done();
+      });
+
+      transform.write('no json {"some":"json"}');
+      transform.end();
+    });
+
+  });
+
 });

@@ -30,7 +30,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/javascript-studio/studio-nsjson.git"
+    "url": "https://github.com/javascript-studio/studio-ndjson.git"
   },
   "license": "MIT"
 }

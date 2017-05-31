@@ -1,5 +1,9 @@
 # Changes
 
+## 1.1.1
+
+- 🐛 Fix typo in git URL
+
 ## 1.1.0
 
 - 🍏 Add `loose` and `loose_out` options to parser

@@ -1,5 +1,11 @@
 # Changes
 
+## 1.1.2
+
+- 📚 Add install instructions
+- 📚 Improve API documentation
+- 📚 Add related modules section
+
 ## 1.1.1
 
 - 🐛 Fix typo in git URL

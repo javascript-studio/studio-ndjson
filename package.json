@@ -1,6 +1,6 @@
 {
   "name": "@studio/ndjson",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Transforms to parse and stringify ndjson",
   "scripts": {
     "lint": "eslint .",

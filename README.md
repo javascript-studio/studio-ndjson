@@ -1,6 +1,6 @@
 # Studio ndjson
 
-Transforms to parse and stringify [ndjson][1].
+☯️ Transforms to parse and stringify [ndjson][1].
 
 ## Usage
 

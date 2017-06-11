@@ -56,6 +56,12 @@ properties:
 If `JSON.parse` or `JSON.stringify` throw an error, the transform emits an
 `error` event.
 
+## Related modules
+
+- 👻 [Studio Log][2]: This module was refactored out of the logger for
+  [JavaScript Studio][3].
+- 📦 [Studio Changes][4] is used to create the changelog for this module.
+
 ## License
 
 MIT
@@ -63,3 +69,6 @@ MIT
 <div align="center">Made with ❤️ on 🌍</div>
 
 [1]: http://ndjson.org/
+[2]: https://github.com/javascript-studio/studio-log
+[3]: https://javascript.studio
+[4]: https://github.com/javascript-studio/studio-changes

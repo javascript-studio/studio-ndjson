@@ -35,20 +35,23 @@ Require the transform you need:
 - `@studio/ndjson/parse`: Exports the `ParseTransform` class which reads
   strings and writes objects.
 
-The module also exports `StringifyTransform` and `ParseTransform` if you need
+The module main exports `StringifyTransform` and `ParseTransform` if you need
 both:
 
 ```js
 const { StringifyTransform, ParseTransform } = require('@studio/ndjson');
 ```
 
-## ParseTransform options
+### ParseTransform options
+
+The `ParseTransform` constructor accepts an `options` object with these
+properties:
 
 - `loose`: Whether to ignore data before the first `{` in each line.
 - `loose_out`: A stream to receive data that was found before the first `{` in
   each line. Implies `loose`.
 
-## Error handling
+### Error handling
 
 If `JSON.parse` or `JSON.stringify` throw an error, the transform emits an
 `error` event.

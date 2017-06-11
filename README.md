@@ -20,6 +20,12 @@ const ParseTransform = require('@studio/ndjson/parse');
 process.stdin.pipe(new ParseTransform()).pipe(object_stream);
 ```
 
+## Install
+
+```bash
+$ npm install @studio/ndjson --save
+```
+
 ## API
 
 Require the transform you need:

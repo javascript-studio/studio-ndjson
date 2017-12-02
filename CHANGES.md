@@ -1,5 +1,13 @@
 # Changes
 
+## 1.2.0
+
+- 🍏 Add more details to emitted errors
+
+    - `JSON.parse` errors have `code` set to `"ERR_JSON_PARSE"` and `line` to
+      the string causing the parse error.
+    - `JSON.stringify` errors have `code` set to `"ERR_JSON_STRINGIFY"`.
+
 ## 1.1.2
 
 - 📚 Add install instructions

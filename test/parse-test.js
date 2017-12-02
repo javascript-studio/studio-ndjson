@@ -78,7 +78,9 @@ describe('ParseTransform', () => {
 
     sinon.assert.calledOnce(spy);
     sinon.assert.calledWithMatch(spy, {
-      name: 'SyntaxError'
+      name: 'SyntaxError',
+      code: 'ERR_JSON_PARSE',
+      line: 'no json'
     });
   });
 

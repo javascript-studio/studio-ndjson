@@ -64,6 +64,8 @@ module.exports = class extends Transform {
     try {
       parsed = JSON.parse(line);
     } catch (e) {
+      e.code = 'ERR_JSON_PARSE';
+      e.line = line;
       callback(e);
       return true;
     }

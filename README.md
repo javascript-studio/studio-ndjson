@@ -54,7 +54,9 @@ properties:
 ### Error handling
 
 If `JSON.parse` or `JSON.stringify` throw an error, the transform emits an
-`error` event.
+`error` event with the error object having a `code` property with
+`ERR_JSON_PARSE` or `ERR_JSON_STRINGIFY`. For parse errors, the `line` property
+on the error is the string that could not be parsed.
 
 ## Related modules
 

@@ -21,6 +21,7 @@ module.exports = class extends Transform {
     try {
       str = JSON.stringify(data);
     } catch (e) {
+      e.code = 'ERR_JSON_STRINGIFY';
       callback(e);
       return;
     }

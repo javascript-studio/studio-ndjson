@@ -38,7 +38,8 @@ describe('StringifyTransform', () => {
     sinon.assert.calledOnce(spy);
     sinon.assert.calledWithMatch(spy, {
       name: 'Error',
-      message: 'Ouch!'
+      message: 'Ouch!',
+      code: 'ERR_JSON_STRINGIFY'
     });
   });
 

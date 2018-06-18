@@ -70,14 +70,14 @@ describe('ParseTransform', () => {
 
   it('handles parse error', () => {
     const transform = new ParseTransform();
-    const spy = sinon.spy();
-    transform.on('error', spy);
+    const fake = sinon.fake();
+    transform.on('error', fake);
 
     transform.write('no json\n');
     transform.end();
 
-    sinon.assert.calledOnce(spy);
-    sinon.assert.calledWithMatch(spy, {
+    sinon.assert.calledOnce(fake);
+    sinon.assert.calledWithMatch(fake, {
       name: 'SyntaxError',
       code: 'ERR_JSON_PARSE',
       line: 'no json'
@@ -86,14 +86,14 @@ describe('ParseTransform', () => {
 
   it('handles parse error when flushing remainder', () => {
     const transform = new ParseTransform();
-    const spy = sinon.spy();
-    transform.on('error', spy);
+    const fake = sinon.fake();
+    transform.on('error', fake);
 
     transform.write('no json');
     transform.end();
 
-    sinon.assert.calledOnce(spy);
-    sinon.assert.calledWithMatch(spy, {
+    sinon.assert.calledOnce(fake);
+    sinon.assert.calledWithMatch(fake, {
       name: 'SyntaxError'
     });
   });
@@ -102,13 +102,13 @@ describe('ParseTransform', () => {
 
     it('ignores line without `{`', (done) => {
       const transform = new ParseTransform({ loose: true });
-      const spy = sinon.spy();
-      transform.on('error', spy);
+      const fake = sinon.fake();
+      transform.on('error', fake);
       transform.on('data', () => {
         assert.fail('Unexpected data');
       });
       transform.on('end', () => {
-        sinon.assert.notCalled(spy);
+        sinon.assert.notCalled(fake);
         done();
       });
 
@@ -118,14 +118,14 @@ describe('ParseTransform', () => {
 
     it('ignores data before first `{`', (done) => {
       const transform = new ParseTransform({ loose: true });
-      const spy = sinon.spy();
-      transform.on('error', spy);
+      const fake = sinon.fake();
+      transform.on('error', fake);
       const entries = [];
       transform.on('data', (entry) => {
         entries.push(entry);
       });
       transform.on('end', () => {
-        sinon.assert.notCalled(spy);
+        sinon.assert.notCalled(fake);
         assert.deepEqual(entries, [{ some: 'json' }]);
         done();
       });

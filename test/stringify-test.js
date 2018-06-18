@@ -30,13 +30,13 @@ describe('StringifyTransform', () => {
 
   it('handles stringify error', () => {
     const transform = new StringifyTransform();
-    const spy = sinon.spy();
-    transform.on('error', spy);
+    const fake = sinon.fake();
+    transform.on('error', fake);
 
     transform.write({ toJSON: () => { throw new Error('Ouch!'); } });
 
-    sinon.assert.calledOnce(spy);
-    sinon.assert.calledWithMatch(spy, {
+    sinon.assert.calledOnce(fake);
+    sinon.assert.calledWithMatch(fake, {
       name: 'Error',
       message: 'Ouch!',
       code: 'ERR_JSON_STRINGIFY'

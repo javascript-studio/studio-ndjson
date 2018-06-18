@@ -3,7 +3,6 @@
  *
  * @license MIT
  */
-/*eslint-disable prefer-template*/
 'use strict';
 
 const Transform = require('stream').Transform;
@@ -25,6 +24,7 @@ module.exports = class extends Transform {
       callback(e);
       return;
     }
+    // eslint-disable-next-line prefer-template
     callback(null, str + '\n');
   }
 

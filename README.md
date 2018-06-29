@@ -2,6 +2,9 @@
 
 ☯️ Transforms to parse and stringify [ndjson][1].
 
+> This module also works in the browser using a [naive `stream` shim][4] for
+> small Browserify bundles.
+
 ## Usage
 
 To stringify an object stream into ndjson:
@@ -23,7 +26,7 @@ process.stdin.pipe(new ParseTransform()).pipe(object_stream);
 ## Install
 
 ```bash
-$ npm install @studio/ndjson --save
+❯ npm i @studio/ndjson
 ```
 
 ## API
@@ -62,7 +65,9 @@ on the error is the string that could not be parsed.
 
 - 👻 [Studio Log][2]: This module was refactored out of the logger for
   [JavaScript Studio][3].
-- 📦 [Studio Changes][4] is used to create the changelog for this module.
+- 💧 [Studio Browser Stream][4] is a naive `stream` shim for small Browserify
+  bundles.
+- 📦 [Studio Changes][5] is used to create the changelog for this module.
 
 ## License
 
@@ -73,4 +78,5 @@ MIT
 [1]: http://ndjson.org/
 [2]: https://github.com/javascript-studio/studio-log
 [3]: https://javascript.studio
-[4]: https://github.com/javascript-studio/studio-changes
+[4]: https://github.com/javascript-studio/studio-browser-stream
+[5]: https://github.com/javascript-studio/studio-changes

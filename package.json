@@ -30,7 +30,7 @@
   "devDependencies": {
     "@studio/changes": "^1.5.0",
     "@studio/eslint-config": "^1.0.2",
-    "eslint": "^4.19.1",
+    "eslint": "^5.0.1",
     "mocha": "^5.2.0",
     "mochify": "^5.8.0",
     "sinon": "^6.0.0"

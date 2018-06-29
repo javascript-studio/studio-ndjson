@@ -1,5 +1,12 @@
 # Changes
 
+## 2.0.0
+
+- 🍏 [`2b6f648`](https://github.com/javascript-studio/studio-ndjson/commit/2b6f64878c85891e5f7956080feaab33f5df5877)
+  Browser support using [Studio Browser Stream][stream] as the `stream` shim
+
+[stream]: https://github.com/javascript-studio/studio-browser-stream
+
 ## 1.2.0
 
 - 🍏 Add more details to emitted errors

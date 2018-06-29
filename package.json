@@ -28,12 +28,12 @@
     "@studio/browser-stream": "^1.0.0"
   },
   "devDependencies": {
-    "@studio/changes": "^1.5.0",
+    "@studio/changes": "^1.5.1",
     "@studio/eslint-config": "^1.0.2",
     "eslint": "^5.0.1",
     "mocha": "^5.2.0",
     "mochify": "^5.8.0",
-    "sinon": "^6.0.0"
+    "sinon": "^6.0.1"
   },
   "repository": {
     "type": "git",

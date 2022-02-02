@@ -33,7 +33,7 @@
     "eslint": "^5.0.1",
     "mocha": "^5.2.0",
     "mochify": "^9.1.0",
-    "sinon": "^6.0.1"
+    "sinon": "^13.0.1"
   },
   "repository": {
     "type": "git",

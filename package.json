@@ -16,7 +16,7 @@
   },
   "keywords": [
     "json",
-    "nsjson",
+    "ndjson",
     "transform"
   ],
   "author": "Maximilian Antoni <max@javascript.studio>",
@@ -24,16 +24,23 @@
   "eslintConfig": {
     "extends": "@studio"
   },
+  "mochify": {
+    "driver": "puppeteer",
+    "bundle": "esbuild --bundle --color --sourcemap=inline --define:process.env.NODE_DEBUG=\"\"",
+    "bundle_stdin": "require"
+  },
   "dependencies": {
     "@studio/browser-stream": "^1.0.0"
   },
   "devDependencies": {
+    "@mochify/cli": "^0.4.1",
+    "@mochify/driver-puppeteer": "^0.3.1",
     "@sinonjs/referee-sinon": "^12.0.0",
     "@studio/changes": "^2.0.1",
     "@studio/eslint-config": "^1.0.2",
+    "esbuild": "^0.19.11",
     "eslint": "^5.0.1",
-    "mocha": "^5.2.0",
-    "mochify": "^9.1.0"
+    "mocha": "^10.2.0"
   },
   "repository": {
     "type": "git",

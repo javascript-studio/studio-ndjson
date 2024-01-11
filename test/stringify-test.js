@@ -28,19 +28,22 @@ describe('StringifyTransform', () => {
     input.end();
   });
 
-  it('handles stringify error', () => {
+  it('handles stringify error', (done) => {
     const transform = new StringifyTransform();
     const fake = sinon.fake();
     transform.on('error', fake);
 
     transform.write({ toJSON: () => { throw new Error('Ouch!'); } });
 
-    sinon.assert.calledOnce(fake);
-    sinon.assert.calledWithMatch(fake, {
-      name: 'Error',
-      message: 'Ouch!',
-      code: 'ERR_JSON_STRINGIFY'
-    });
+    setTimeout(() => {
+      sinon.assert.calledOnce(fake);
+      sinon.assert.calledWithMatch(fake, {
+        name: 'Error',
+        message: 'Ouch!',
+        code: 'ERR_JSON_STRINGIFY'
+      });
+      done();
+    }, 1);
   });
 
 });

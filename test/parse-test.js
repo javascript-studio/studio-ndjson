@@ -68,23 +68,25 @@ describe('ParseTransform', () => {
     transform.end();
   });
 
-  it('handles parse error', () => {
+  it('handles parse error', (done) => {
     const transform = new ParseTransform();
     const fake = sinon.fake();
     transform.on('error', fake);
 
     transform.write('no json\n');
     transform.end();
-
-    sinon.assert.calledOnce(fake);
-    sinon.assert.calledWithMatch(fake, {
-      name: 'SyntaxError',
-      code: 'ERR_JSON_PARSE',
-      line: 'no json'
-    });
+    setTimeout(() => {
+      sinon.assert.calledOnce(fake);
+      sinon.assert.calledWithMatch(fake, {
+        name: 'SyntaxError',
+        code: 'ERR_JSON_PARSE',
+        line: 'no json'
+      });
+      done();
+    }, 1);
   });
 
-  it('handles parse error when flushing remainder', () => {
+  it('handles parse error when flushing remainder', (done) => {
     const transform = new ParseTransform();
     const fake = sinon.fake();
     transform.on('error', fake);
@@ -92,10 +94,13 @@ describe('ParseTransform', () => {
     transform.write('no json');
     transform.end();
 
-    sinon.assert.calledOnce(fake);
-    sinon.assert.calledWithMatch(fake, {
-      name: 'SyntaxError'
-    });
+    setTimeout(() => {
+      sinon.assert.calledOnce(fake);
+      sinon.assert.calledWithMatch(fake, {
+        name: 'SyntaxError'
+      });
+      done();
+    }, 1);
   });
 
   describe('loose', () => {

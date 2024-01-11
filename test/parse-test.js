@@ -6,7 +6,6 @@ const PassThrough = require('stream').PassThrough;
 const ParseTransform = require('../parse');
 
 describe('ParseTransform', () => {
-
   it('parses JSON', (done) => {
     const input = new PassThrough();
     const output = new PassThrough({ objectMode: true });
@@ -103,7 +102,6 @@ describe('ParseTransform', () => {
   });
 
   describe('loose', () => {
-
     it('ignores line without `{`', (done) => {
       const transform = new ParseTransform({ loose: true });
       const fake = sinon.fake();
@@ -137,11 +135,9 @@ describe('ParseTransform', () => {
       transform.write('no json {"some":"json"}\n');
       transform.end();
     });
-
   });
 
   describe('loose_out', () => {
-
     it('passes line without `{` through', (done) => {
       const out = new PassThrough();
       const transform = new ParseTransform({ loose_out: out });
@@ -223,7 +219,5 @@ describe('ParseTransform', () => {
       transform.write('{ console: "message" }');
       transform.end();
     });
-
   });
-
 });

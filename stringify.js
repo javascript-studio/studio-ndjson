@@ -8,7 +8,6 @@
 const Transform = require('stream').Transform;
 
 module.exports = class extends Transform {
-
   constructor() {
     super({
       writableObjectMode: true
@@ -27,5 +26,4 @@ module.exports = class extends Transform {
     // eslint-disable-next-line prefer-template
     callback(null, str + '\n');
   }
-
 };

@@ -204,6 +204,27 @@ describe('ParseTransform', () => {
       transform.end();
     });
 
+    it('passes line through on JSON parse error', (done) => {
+      const out = new PassThrough();
+      const transform = new ParseTransform({ loose_out: out });
+      const entries = [];
+      transform.on('data', (entry) => {
+        entries.push(entry);
+      });
+      let str = '';
+      out.on('data', (chunk) => {
+        str += chunk;
+      });
+      transform.on('end', () => {
+        assert.equal(str, '{ console: "message" }\n');
+        assert.deepEqual(entries, []);
+        done();
+      });
+
+      transform.write('{ console: "message" }');
+      transform.end();
+    });
+
   });
 
 });

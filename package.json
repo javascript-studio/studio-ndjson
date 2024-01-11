@@ -37,9 +37,9 @@
     "@mochify/driver-puppeteer": "^0.3.1",
     "@sinonjs/referee-sinon": "^12.0.0",
     "@studio/changes": "^2.0.1",
-    "@studio/eslint-config": "^1.0.2",
+    "@studio/eslint-config": "^6.0.0",
     "esbuild": "^0.19.11",
-    "eslint": "^5.0.1",
+    "eslint": "^8.56.0",
     "mocha": "^10.2.0"
   },
   "repository": {

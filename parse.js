@@ -8,7 +8,6 @@
 const Transform = require('stream').Transform;
 
 module.exports = class extends Transform {
-
   constructor(options) {
     super({
       readableObjectMode: true
@@ -77,5 +76,4 @@ module.exports = class extends Transform {
     this.push(parsed);
     return false;
   }
-
 };

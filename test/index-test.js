@@ -7,7 +7,6 @@ const ParseTransform = require('../parse');
 const index = require('..');
 
 describe('index', () => {
-
   it('exports StringifyTransform', () => {
     assert.same(index.StringifyTransform, StringifyTransform);
   });
@@ -15,5 +14,4 @@ describe('index', () => {
   it('exports ParseTransform', () => {
     assert.same(index.ParseTransform, ParseTransform);
   });
-
 });

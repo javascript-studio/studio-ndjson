@@ -6,7 +6,6 @@ const PassThrough = require('stream').PassThrough;
 const StringifyTransform = require('../stringify');
 
 describe('StringifyTransform', () => {
-
   it('stringifies data', (done) => {
     const input = new PassThrough({ objectMode: true });
     const output = new PassThrough();
@@ -32,7 +31,11 @@ describe('StringifyTransform', () => {
     const fake = sinon.fake();
     transform.on('error', fake);
 
-    transform.write({ toJSON: () => { throw new Error('Ouch!'); } });
+    transform.write({
+      toJSON: () => {
+        throw new Error('Ouch!');
+      }
+    });
 
     setTimeout(() => {
       assert.calledOnce(fake);
@@ -44,5 +47,4 @@ describe('StringifyTransform', () => {
       done();
     }, 1);
   });
-
 });

@@ -6,10 +6,11 @@
     "lint": "eslint .",
     "test": "mocha && mochify",
     "watch": "mocha --watch",
-    "posttest": "npm run lint",
-    "preversion": "npm test",
+    "preversion": "npm run lint && npm run prettier:check && npm test",
     "version": "changes --commits --footer",
-    "postversion": "git push --follow-tags && npm publish"
+    "postversion": "git push --follow-tags && npm publish",
+    "prettier:check": "prettier --check '**/*.{js,json,md}'",
+    "prettier:write": "prettier --write '**/*.{js,json,md}'"
   },
   "browser": {
     "stream": "@studio/browser-stream"
@@ -40,7 +41,8 @@
     "@studio/eslint-config": "^6.0.0",
     "esbuild": "^0.19.11",
     "eslint": "^8.56.0",
-    "mocha": "^10.2.0"
+    "mocha": "^10.2.0",
+    "prettier": "^3.1.1"
   },
   "repository": {
     "type": "git",

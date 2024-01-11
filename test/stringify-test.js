@@ -1,8 +1,7 @@
 /*eslint-env mocha*/
 'use strict';
 
-const assert = require('assert');
-const sinon = require('sinon');
+const { assert, sinon } = require('@sinonjs/referee-sinon');
 const PassThrough = require('stream').PassThrough;
 const StringifyTransform = require('../stringify');
 
@@ -19,7 +18,7 @@ describe('StringifyTransform', () => {
       str += data;
     });
     output.on('end', () => {
-      assert.equal(str, '{"a":1}\n{"b":2}\n');
+      assert.equals(str, '{"a":1}\n{"b":2}\n');
       done();
     });
 
@@ -36,8 +35,8 @@ describe('StringifyTransform', () => {
     transform.write({ toJSON: () => { throw new Error('Ouch!'); } });
 
     setTimeout(() => {
-      sinon.assert.calledOnce(fake);
-      sinon.assert.calledWithMatch(fake, {
+      assert.calledOnce(fake);
+      assert.calledWithMatch(fake, {
         name: 'Error',
         message: 'Ouch!',
         code: 'ERR_JSON_STRINGIFY'

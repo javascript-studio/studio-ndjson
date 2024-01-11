@@ -28,12 +28,12 @@
     "@studio/browser-stream": "^1.0.0"
   },
   "devDependencies": {
+    "@sinonjs/referee-sinon": "^12.0.0",
     "@studio/changes": "^2.0.1",
     "@studio/eslint-config": "^1.0.2",
     "eslint": "^5.0.1",
     "mocha": "^5.2.0",
-    "mochify": "^9.1.0",
-    "sinon": "^13.0.1"
+    "mochify": "^9.1.0"
   },
   "repository": {
     "type": "git",

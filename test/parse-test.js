@@ -1,8 +1,7 @@
 /*eslint-env mocha*/
 'use strict';
 
-const assert = require('assert');
-const sinon = require('sinon');
+const { assert, refute, sinon } = require('@sinonjs/referee-sinon');
 const PassThrough = require('stream').PassThrough;
 const ParseTransform = require('../parse');
 
@@ -19,9 +18,9 @@ describe('ParseTransform', () => {
       entries.push(entry);
     });
     output.on('end', () => {
-      assert.equal(entries.length, 2);
-      assert.deepEqual(entries[0], { a: 1 });
-      assert.deepEqual(entries[1], { b: 2 });
+      assert.equals(entries.length, 2);
+      assert.equals(entries[0], { a: 1 });
+      assert.equals(entries[1], { b: 2 });
       done();
     });
 
@@ -38,9 +37,9 @@ describe('ParseTransform', () => {
       entries.push(entry);
     });
     transform.on('end', () => {
-      assert.equal(entries.length, 2);
-      assert.deepEqual(entries[0], { a: 1 });
-      assert.deepEqual(entries[1], { b: 2 });
+      assert.equals(entries.length, 2);
+      assert.equals(entries[0], { a: 1 });
+      assert.equals(entries[1], { b: 2 });
       done();
     });
     return transform;
@@ -76,8 +75,8 @@ describe('ParseTransform', () => {
     transform.write('no json\n');
     transform.end();
     setTimeout(() => {
-      sinon.assert.calledOnce(fake);
-      sinon.assert.calledWithMatch(fake, {
+      assert.calledOnce(fake);
+      assert.calledWithMatch(fake, {
         name: 'SyntaxError',
         code: 'ERR_JSON_PARSE',
         line: 'no json'
@@ -95,8 +94,8 @@ describe('ParseTransform', () => {
     transform.end();
 
     setTimeout(() => {
-      sinon.assert.calledOnce(fake);
-      sinon.assert.calledWithMatch(fake, {
+      assert.calledOnce(fake);
+      assert.calledWithMatch(fake, {
         name: 'SyntaxError'
       });
       done();
@@ -110,10 +109,10 @@ describe('ParseTransform', () => {
       const fake = sinon.fake();
       transform.on('error', fake);
       transform.on('data', () => {
-        assert.fail('Unexpected data');
+        throw new Error('Unexpected data');
       });
       transform.on('end', () => {
-        sinon.assert.notCalled(fake);
+        refute.called(fake);
         done();
       });
 
@@ -130,8 +129,8 @@ describe('ParseTransform', () => {
         entries.push(entry);
       });
       transform.on('end', () => {
-        sinon.assert.notCalled(fake);
-        assert.deepEqual(entries, [{ some: 'json' }]);
+        refute.called(fake);
+        assert.equals(entries, [{ some: 'json' }]);
         done();
       });
 
@@ -147,14 +146,14 @@ describe('ParseTransform', () => {
       const out = new PassThrough();
       const transform = new ParseTransform({ loose_out: out });
       transform.on('data', () => {
-        assert.fail('Unexpected data');
+        throw new Error('Unexpected data');
       });
       let str = '';
       out.on('data', (chunk) => {
         str += chunk;
       });
       transform.on('end', () => {
-        assert.equal(str, 'no json\n');
+        assert.equals(str, 'no json\n');
         done();
       });
 
@@ -174,8 +173,8 @@ describe('ParseTransform', () => {
         str += chunk;
       });
       transform.on('end', () => {
-        assert.equal(str, 'no json ');
-        assert.deepEqual(entries, [{ some: 'json' }]);
+        assert.equals(str, 'no json ');
+        assert.equals(entries, [{ some: 'json' }]);
         done();
       });
 
@@ -195,8 +194,8 @@ describe('ParseTransform', () => {
         str += chunk;
       });
       transform.on('end', () => {
-        assert.equal(str, 'no json ');
-        assert.deepEqual(entries, [{ some: 'json' }]);
+        assert.equals(str, 'no json ');
+        assert.equals(entries, [{ some: 'json' }]);
         done();
       });
 
@@ -216,8 +215,8 @@ describe('ParseTransform', () => {
         str += chunk;
       });
       transform.on('end', () => {
-        assert.equal(str, '{ console: "message" }\n');
-        assert.deepEqual(entries, []);
+        assert.equals(str, '{ console: "message" }\n');
+        assert.equals(entries, []);
         done();
       });
 

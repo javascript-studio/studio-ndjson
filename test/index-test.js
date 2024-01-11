@@ -1,7 +1,7 @@
 /*eslint-env mocha*/
 'use strict';
 
-const assert = require('assert');
+const { assert } = require('@sinonjs/referee-sinon');
 const StringifyTransform = require('../stringify');
 const ParseTransform = require('../parse');
 const index = require('..');
@@ -9,11 +9,11 @@ const index = require('..');
 describe('index', () => {
 
   it('exports StringifyTransform', () => {
-    assert.strictEqual(index.StringifyTransform, StringifyTransform);
+    assert.same(index.StringifyTransform, StringifyTransform);
   });
 
   it('exports ParseTransform', () => {
-    assert.strictEqual(index.ParseTransform, ParseTransform);
+    assert.same(index.ParseTransform, ParseTransform);
   });
 
 });
